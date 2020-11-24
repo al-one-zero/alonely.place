@@ -1,0 +1,144 @@
+@mixin change($prop, $dur: .4s)
+    transition:
+        duration: $dur
+        timing-function: ease-in-out
+        property: $prop
+
+/* Custom Colors */
+$raisin-black: #201f25ff
+$baby-powder: #f8f9f1ff
+$blue-jeans: #4faeffff
+$baby-blue-jeans: #99cfff
+$red-ryb: #f72c25ff
+$bittersweet: #ff6b6bff
+
+/* Custom Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&family=Open+Sans:wght@300;400&family=PT+Serif:wght@400;700&family=Pontano+Sans&family=Source+Serif+Pro:wght@400;600&family=Work+Sans:wght@100;200;300;400&display=swap')
+$pt-serif: 'PT Serif', serif
+$source-serif: 'Source Serif Pro', serif
+$pontano-sans: 'Pontano Sans', sans-serif
+$open-sans-con: 'Open Sans Condensed', sans-serif
+$open-sans: 'Open Sans', sans-serif
+$work-sans: 'Work Sans', sans-serif
+
+/* Style definitions */
+/* Color */
+$main-color: $raisin-black
+$accent: $blue-jeans
+$sub-accent: $baby-blue-jeans
+$accent-2: $red-ryb
+$sub-accent-2: $bittersweet
+$text-color: $baby-powder
+
+/* Font */
+$heading-font: $pt-serif
+$sub-font: $work-sans
+$p-font: $work-sans
+
+*
+    color: $text-color
+    background-color: $main-color
+    font:
+        weight: 300
+        family: $p-font
+        size: 1em
+
+h1, h2, h3
+    font-family: $heading-font
+
+h1 
+    font-size: 5em
+
+h2 
+    font:
+        size: 3.2em
+        style: italic
+
+header
+    text-align: right
+    padding-right: 2em
+    border-right: 
+        color: $text-color
+        width: 2px
+        style: solid
+
+p.sub
+    font:
+        family: $sub-font
+        size: 2.8rem
+        weight: 200
+
+p, nav
+    font:
+        family: $p-font
+        size: 1.5rem
+        weight: 100
+
+a
+    color: $accent
+    text-decoration: none
+    @include change(color)
+    &:hover 
+        color: $sub-accent
+
+a:visited
+    color: $accent-2
+    text-decoration: none
+    @include change(color)
+    &:hover 
+        color: $sub-accent-2
+
+li 
+    list-style-type: none
+    font-size: 1.2em
+
+/* Layout */
+body
+    margin: auto
+    display: grid
+    grid-template-areas: "head  nav" "head sec" "head foot"
+    justify-content: center
+    width: 80%
+    min-width: 500px
+    height: 300pt
+    padding-top: 10%
+
+nav
+    min-width: 350px
+    grid-area: nav
+
+header
+    min-width: 350px
+    grid-area: head
+
+section 
+    grid-area: sec
+
+header *
+    margin: 0px
+
+footer *
+    margin: 0px
+
+section *
+    margin: 0px
+
+footer, section
+    min-width: 350px
+    padding-left: 10%
+    display: flex
+    flex-direction: column
+
+footer 
+    padding-top: 50px
+    grid-area: foot
+    justify-content: flex-end
+
+nav, li
+    display: flex
+    flex:
+        direction: column
+    justify-content: space-evenly
+
+li
+    margin: 5%
