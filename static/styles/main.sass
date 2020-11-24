@@ -35,13 +35,23 @@ $heading-font: $pt-serif
 $sub-font: $work-sans
 $p-font: $work-sans
 
+/* Animations */
+@keyframes fade-to-random-black
+    from
+        background-color: $main-color
+    to
+        background-color: mix($main-color, black, percentage(random(100)/100))
+
 *
     color: $text-color
-    background-color: $main-color
     font:
         weight: 300
         family: $p-font
         size: 1em
+
+body
+    background-color: $main-color
+    animation: fade-to-random-black 50s linear infinite alternate
 
 h1, h2, h3
     font-family: $heading-font
@@ -99,9 +109,13 @@ body
     grid-template-areas: "head  nav" "head sec" "head foot"
     justify-content: center
     width: 80%
-    min-width: 700px
     height: 300pt
-    padding-top: 10%
+    min:
+        width: 700px
+        height: 400px
+    padding:
+        top: 50px
+        bottom: 50px
 
 nav
     min-width: 350px
