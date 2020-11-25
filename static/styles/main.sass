@@ -1,3 +1,6 @@
+@import '_include-media.scss'
+$breakpoints: (phone: 680px, tablet: 768px, desktop: 1100px) !default
+
 @mixin change($prop, $dur: .4s)
     transition:
         duration: $dur
@@ -42,6 +45,7 @@ $p-font: $work-sans
     to
         background-color: mix($main-color, black, percentage(random(100)/100))
 
+/* Style */
 *
     color: $text-color
     font:
@@ -57,26 +61,46 @@ h1, h2, h3
     font-family: $heading-font
 
 h1 
-    font-size: 5em
+    @include media('>=desktop')
+        font-size: 5em
+    @include media('<desktop')
+        font-size: 4em
 
 h2 
+    @include media('<desktop')
+        font-size: 2.8em
+    @include media('>=desktop')
+        font-size: 3.2em
     font:
-        size: 3.2em
         style: italic
 
+#err 
+    color: $accent-2
+
+#err-msg
+    color: $sub-accent-2
+
 header
-    text-align: right
-    padding-right: 2em
-    border-right: 
-        color: $text-color
-        width: 2px
-        style: solid
+    @include media('>=desktop')
+        text-align: right
+        border-right: 
+            color: $text-color
+            width: 2px
+            style: solid
+    @include media('<desktop')
+        text-align: left
+        border-bottom: 
+            color: $text-color
+            width: 2px
+            style: solid
 
 p.sub
     font:
         family: $sub-font
-        size: 2.8rem
+        size: 2.5em
         weight: 200
+    @include media('<desktop')
+        font-size: 2.3rem
 
 p, nav
     font:
@@ -91,68 +115,95 @@ a
     &:hover 
         color: $sub-accent
 
-a:visited
-    color: $accent-2
-    text-decoration: none
-    @include change(color)
-    &:hover 
-        color: $sub-accent-2
-
 li 
     list-style-type: none
     font-size: 1.2em
 
+footer *
+    font-size: .9em
+
 /* Layout */
 body
-    margin: auto
-    display: grid
-    grid-template-areas: "head  nav" "head sec" "head foot"
-    justify-content: center
-    width: 80%
-    height: 300pt
-    min:
-        width: 700px
-        height: 400px
-    padding:
-        top: 50px
-        bottom: 50px
+    margin: 0px
+    @include media('>=desktop', 'landscape')
+        display: grid
+        grid-template-areas: "head  nav" "head sec" "head foot"
+        place-content: center center
+        place-items: stretch stretch
+        min:
+            width: 900px
+            height: 400px
+        height: 100vh
+    @include media('<desktop') 
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
 
 nav
-    min-width: 350px
     grid-area: nav
+    padding-bottom: 5%
+    flex-grow: 1
+    @include media('<desktop')
+        text-align: right
 
 header
-    min-width: 350px
     grid-area: head
+    display: flex 
+    flex-direction: column
+    align-items: stretch
+    min-width: 330px
+    @include media('<desktop')
+        padding:
+            top: 5%
+            bottom: 5%
+
+header *
+    @include media('>=desktop')
+        padding:
+            right: 5%
+        float: right
+    @include media('<desktop')
+        float: left
 
 section 
     grid-area: sec
+    flex-grow: 4
+    padding-bottom: 5%
+    @include media('>=desktop')
+        padding-right: 5%
 
-header *
-    margin: 0px
+body nav, body header, body section, body footer
+    @include media('<desktop')
+        @include media('landscape')
+            width: 85%
+        @include media('portrait')
+            width: 93%
 
-footer *
-    margin: 0px
-
-section *
+body *
     margin: 0px
 
 footer, section
-    min-width: 350px
-    padding-left: 10%
-    display: flex
-    flex-direction: column
+    @include media('>=desktop')
+        min-width: 350px
+        padding-left: 5%
 
 footer 
-    padding-top: 50px
     grid-area: foot
-    justify-content: flex-end
+    @include media('<desktop')
+        padding-bottom: 5%
 
-nav, li
+nav
     display: flex
     flex:
         direction: column
-    justify-content: space-evenly
+    place-content: space-evenly flex-end
 
 li
-    margin: 5%
+    margin:
+        top: 5%
+
+ul
+    @include media('<desktop')
+        direction: rtl
+        padding-inline-start: 20px
